@@ -44,6 +44,7 @@
               <li><a [routerLink]="['/bees']" [queryParams]="{p:'skin'}">Chăm sóc da</a></li>
               <li><a [routerLink]="['/bees']" [queryParams]="{p:'hair'}">Chăm sóc tóc</a></li>
               <li><a [routerLink]="['/bees']" [queryParams]="{p:'body'}">Chăm sóc body</a></li>
+              <li><a [routerLink]="['/bees']" [queryParams]="{p:'help'}">Trợ giúp</a></li>
             </ul>
           </li>
         </ul>
@@ -105,7 +106,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" (click)="redirectToUserSetting()" [ngClass]="{'seperate-line': userInfo?.role != 'bee'}">Tài khoản của tôi</a>
-              <a class="dropdown-item" *ngIf="!this.userInfo || showBecomePandaBtn" (click)="redirectBecomeBee()" routerLinkActive="router-link-active">TRở thành Bee</a>
+              <a class="dropdown-item" *ngIf="!this.userInfo || showBecomePandaBtn" (click)="redirectBecomeBee()" routerLinkActive="router-link-active">Trở thành Bee</a>
               <a class="dropdown-item" (click)="redirectToTestDevice()">Kiểm tra thiết bị</a>
               <a class="dropdown-item" (click)="signOut()">Đăng xuất</a>
             </div>
