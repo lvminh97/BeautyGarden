@@ -30,7 +30,8 @@ import { MeetingComponent } from 'src/app/pages/meeting/meeting.component';
         {path: 'account-setting', component: AccSettingComponent},
         {path: 'become-bee', component: BecomeBeeComponent},
         {path: 'call', component: AgoraCallComponent},
-        {path: 'meet', component: MeetingComponent}
+        {path: 'meet', component: MeetingComponent},
+        {path: 'help', component: LoginComponent}
       ]
     }])
   ]

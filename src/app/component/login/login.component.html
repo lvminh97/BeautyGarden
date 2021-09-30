@@ -8,7 +8,7 @@
             </button>
           </div>
           <div class="modal-body">
-            
+
             <form method="post" [formGroup]="formLogin">
               <div class="form-group">
                 <label for="InputEmail1">Email</label>
@@ -33,7 +33,7 @@
               <div class='box-dont-account mt-3'>
                 <button style="padding-left: 0px" type='button' class="btn btn-clear" [routerLink]="['/forgot-password']" (click)="closeLoginModal()">Quên mật khẩu</button>
               </div>
-             
+
               <div class="justify-content-center d-flex">
                 <button type="submit" class="btn btn-primary btn-login mt-3"  (click)="login()">Đăng nhập</button>
               </div>
@@ -54,7 +54,7 @@
             </button>
           </div>
           <div class="modal-body">
-            
+
             <form method="post" [formGroup]="formSignUp">
               <div class="row">
                 <div class="col-md-12">
@@ -105,21 +105,14 @@
                         Mật khẩu không hợp lệ
                     </small>
                   </div>
-  
+
                 </div>
               </div>
-              
-  
-  
-              
-  
-              
-              
               <div class="justify-content-center d-flex">
                 <button type="submit" class="btn btn-primary btn-login" name="signup"  (click)="signUp()">Đăng ký</button>
               </div>
             </form>
-  
+
           </div>
           <div class="modal-footer justify-content-start">
             <div class='box-dont-account'>
@@ -133,4 +126,3 @@
       </div>
     </div>
   </div>
-  

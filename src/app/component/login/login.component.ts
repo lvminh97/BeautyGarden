@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       c_password: ['', Validators.required],
-     
+
     }, {
         validator: [this.checkConfirmPassword, this.validatePassword]
       });
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
       } else {
         return { invalidPassword: true };
       }
-    
+
   }
   checkConfirmPassword(group: FormGroup) {
     const password = group.get('password').value;
@@ -96,24 +96,30 @@ export class LoginComponent implements OnInit {
           this.cookie.set('account_info', JSON.stringify(newUser), 365, '/')
           debugger;
           this.subjectService.userInfo.next(newUser);
-          
+          window.location.reload()
+
           // this.router.navigate(['/account-settings']);
-  
+
         // } else {
         //   this.helperService.showError('error', "Đăng nhập thất bại");
         // }
         this.closeLoginModal();
-      
+
     }).catch(err => {
-      debugger
+      // debugger
+      // console.log(err.code)
       switch (err.code) {
         case 'auth/user-not-found':
-          this.helperService.showError('error', 'Tài khoản chưa được đăng ký');
-          break;
+          this.helperService.showError('error', 'Tài khoản chưa được đăng ký')
+          break
+        case 'auth/wrong-password':
+          this.helperService.showError('error', 'Sai mật khẩu!')
+          alert('Sai mật khẩu')
+          break
         default:
-          this.helperService.showError('error', "Đăng nhập thất bại");
+          this.helperService.showError('error', "Đăng nhập thất bại")
           alert('Đăng nhập thất bại')
-          break;
+          break
       }
     })
 
@@ -127,7 +133,7 @@ export class LoginComponent implements OnInit {
       this.createUserInfo(newUser);
       newUser.sendEmailVerification();
       this.closeLoginModal();
-      this.helperService.showSuccess('success', 'Đăng ký thành công');        
+      this.helperService.showSuccess('success', 'Đăng ký thành công');
     }).catch(err => {
       this.helperService.showError('error', err.message);
     })
