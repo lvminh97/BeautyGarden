@@ -186,10 +186,12 @@ export class BecomeBeeComponent implements OnInit {
 
   setImagetoAvatar(){
     let url = this.listAvatarDefault.filter(x => x.selected).map(y => y.src);
+    console.log(url)
     if (url.length > 0){
       this.previewAvatar = [];
       this.avatarDefault = url[0];
       this.previewAvatar.push({ url: ``+url, size: 0 });
+      console.log(this.previewAvatar)
       this.closeChooseAvatar();
     }
   }
@@ -306,7 +308,7 @@ export class BecomeBeeComponent implements OnInit {
   }
 
   async updateBeeProfile() {
-    debugger;
+    // debugger;
     this.beeProfile.tags = this.tags;
     this.beeProfile.imageMember = this.previewMember;
     if (this.beeProfile.imageMember.length > 0) {
