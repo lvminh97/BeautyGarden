@@ -106,6 +106,7 @@ export class BecomeBeeComponent implements OnInit {
   async getRegisterInfo() {
     this.previewAvatar = [];
     let res: any = await this.firebaseService.getRefById('users',this.userInfo.id);
+    console.log(res)
     this.beeProfile.displayName = res.displayName;
     this.beeProfile.gender = res.gender;
     this.beeProfile.birthday = res.gender;
@@ -259,12 +260,12 @@ export class BecomeBeeComponent implements OnInit {
         this.previewImage(fileData[i], type, () => { });
       }
     }
-    
+
   }
 
   removeEachImage(index, type, idImg?) {
-    
-      
+
+
         this.previewMember.splice(index, 1);
       if (idImg) {
         // this.apiService.removeEachImage(idImg).subscribe(response => {
@@ -334,7 +335,7 @@ export class BecomeBeeComponent implements OnInit {
       this.helperService.showError('Fail!', "Vui lòng nhập ngày sinh");
       status = false;
     }
-    
+
     if (this.beeProfile.gender == 'Select Gender'){
       this.helperService.showError('Fail!', "Vui lòng chọn giới tính");
       status = false;
@@ -350,7 +351,7 @@ export class BecomeBeeComponent implements OnInit {
     if (status == false) return false;
     this.beeProfile.birthday = moment(this.beeProfile.birthday , 'DD/MM/YYYY').format('YYYY-MM-DD');
     this.helperService.showFullLoading();
-    
+
     // var id = setInterval(() => {
     //   if ((this.beeProfile.video.length == 0 || this.statusUpVideo) && this.statusUpdate) {
     //     clearInterval(id);
@@ -396,7 +397,7 @@ export class BecomeBeeComponent implements OnInit {
     for (let i = 0; i < fileData.length; i++) {
       myFormData.append('video', fileData[i]);
     }
-    
+
   }
 
   onSubmitImage(fileData, type) {
@@ -406,7 +407,7 @@ export class BecomeBeeComponent implements OnInit {
     }
     myFormData.append('type', type);
 
-    
+
   }
 }
 function PopupConfirmComponent(PopupConfirmComponent: any, arg1: { class: string; initialState: { confirmText: any; }; }): any {

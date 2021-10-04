@@ -20,9 +20,7 @@
           <i class="fa fa-calendar" aria-hidden="true"></i>
           <!-- Tuổi {{beeProfile.age}} -->
         </div>
-        <button type="button" class="btn btn-save-change" (click)="updateBeeProfile()">
-          Lưu 
-        </button>
+        <button type="button" class="btn btn-save-change btn-success" (click)="updateBeeProfile()" style="width: 100px">Lưu</button>
       </div>
     </div>
   </div>
@@ -79,7 +77,6 @@
             <div class="pd-dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span>{{ beeProfile.gender }}</span>
-                <i class="fas fa-angle-down"></i>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" (click)="setGender('male')">Nam</a>
@@ -90,14 +87,12 @@
           </div>
           <div class="bdrs-10 bgc-portGoreSecondary p-16 mrb-24 box--tags">
               <div class="header-in-box mrb-16">
-                <p class="fz-20 fw-600 lh-1 isRequire">
-                  Ngày sinh
-                </p>
+                <p class="fz-20 fw-600 lh-1 isRequire">Ngày sinh</p>
               </div>
-              <input type="text" [(ngModel)]="beeProfile.birthday" placeholder="Ngày sinh" class="form-control" 
+              <input type="text" [(ngModel)]="beeProfile.birthday" placeholder="Ngày sinh" class="form-control"
               bsDatepicker [maxDate]="today" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', showWeekNumbers: false }" >
               <div class="pd-dropdown">
-                
+
               </div>
             </div>
           <div class="bdrs-10 bgc-portGoreSecondary p-16 mrb-24 box--tags">
@@ -130,7 +125,7 @@
 
             <div class="pf-timeline-item item--edit">
               <div class="pf-timeline-item__header">
-                <p class="fz-20 fw-600 lh-1 isRequire">
+                <p class="fz-20 fw-600 lh-1 isRequire" style="color: #fff">
                   Ảnh
                 </p>
               </div>
@@ -156,7 +151,7 @@
             <div class="bdrs-10 bgc-portGoreSecondary p-16 mrb-24">
               <div class="header-in-box mrb-16">
                 <p class="fz-20 fw-600 lh-1">
-                  Video 
+                  Video
                 </p>
                 <a class="fz-20 fw-600 color-curiousBlue lh-1" *ngIf="previewVideo.length > 0">
                   <label for="video" class="text-link upload cursor-pointer op-50 color-white">
@@ -186,7 +181,7 @@
             </div>
 
             <div class="only-btn-right mrt-32">
-              <button type="button" class="btn btn-save-change" (click)="updateBeeProfile()"> Lưu</button>
+              <button type="button" class="btn btn-save-change btn-success" (click)="updateBeeProfile()" style="width: 150px"> Lưu</button>
             </div>
 
 
