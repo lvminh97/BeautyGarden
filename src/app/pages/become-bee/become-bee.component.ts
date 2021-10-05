@@ -105,14 +105,14 @@ export class BecomeBeeComponent implements OnInit {
 
   async getRegisterInfo() {
     this.previewAvatar = [];
-    let res: any = await this.firebaseService.getRefById('users',this.userInfo.id);
-    console.log(res)
+    let res: any = await this.firebaseService.getRefById('/users',this.userInfo.id);
     this.beeProfile.displayName = res.displayName;
     this.beeProfile.gender = res.gender;
     this.beeProfile.birthday = res.gender;
-    this.beeProfile.id = res.id;
+    this.beeProfile.id = this.userInfo.id
     this.beeProfile.bio = res.bio;
     this.previewAvatar.push({url: res.logo });
+    console.log(this.beeProfile)
     // console.log(await this.firebaseService.getRefById('users',this.userInfo.id));
   }
 
@@ -169,7 +169,7 @@ export class BecomeBeeComponent implements OnInit {
     reader.readAsDataURL(file);
     reader.onload = (_event) => {
       if (file.size >= this.maxUploadSize) {
-        this.helperService.showError('', 'CHọn ảnh có dung lượng nhỏ hơn 2MB');
+        this.helperService.showError('', 'Chọn ảnh có dung lượng nhỏ hơn 2MB');
         this.beeProfile.avatar = [];
       } else {
         if (type == this.imageType.avatar){
@@ -260,12 +260,9 @@ export class BecomeBeeComponent implements OnInit {
         this.previewImage(fileData[i], type, () => { });
       }
     }
-
   }
 
   removeEachImage(index, type, idImg?) {
-
-
         this.previewMember.splice(index, 1);
       if (idImg) {
         // this.apiService.removeEachImage(idImg).subscribe(response => {
@@ -312,7 +309,7 @@ export class BecomeBeeComponent implements OnInit {
     // debugger;
     this.beeProfile.tags = this.tags;
     this.beeProfile.imageMember = this.previewMember;
-    if (this.beeProfile.imageMember.length > 0) {
+    if(this.beeProfile.imageMember.length > 0) {
       let avtUrls = [];
       this.beeProfile.imageMember.forEach(async (item) => {
         console.log(item);
@@ -346,8 +343,11 @@ export class BecomeBeeComponent implements OnInit {
     }
     if (this.beeProfile.imageMember.length == 0) {
       this.helperService.showError('Fail!', "Hãy tải một ảnh nào đó");
-      status = false;
+      // status = false;
     }
+    
+    console.log(this.beeProfile)
+
     if (status == false) return false;
     this.beeProfile.birthday = moment(this.beeProfile.birthday , 'DD/MM/YYYY').format('YYYY-MM-DD');
     this.helperService.showFullLoading();
@@ -363,9 +363,9 @@ export class BecomeBeeComponent implements OnInit {
     //     this.subjectService.userInfo.next(userInfo);
     //   }
     // }, 200);
-    // if (this.beeProfile.video.length > 0) {
-    //   this.onSubmitVideo(this.beeProfile.video);
-    // }
+    if (this.beeProfile.video.length > 0) {
+      this.onSubmitVideo(this.beeProfile.video);
+    }
     //upload avatar
     if (this.beeProfile.avatar.length > 0 && this.avatarDefault == '') {
       if (this.uploadGif) {
@@ -384,12 +384,10 @@ export class BecomeBeeComponent implements OnInit {
     this.beeProfile.role = 'bee';
     this.beeProfile.displayName = this.userInfo.displayName;
     this.beeProfile.video = []
-    console.log(1111, this.beeProfile);
-    this.firebaseService.updateRef('users',this.userInfo.id,  this.beeProfile);
-      alert("thành công");
-      this.subjectService.userInfo.next(this.beeProfile);
-      this.router.navigate(['/account-setting'])
-
+    this.firebaseService.updateRef('/users', this.userInfo.id, this.beeProfile);
+    alert("thành công");
+    this.subjectService.userInfo.next(this.beeProfile);
+    // this.router.navigate(['/account-setting'])
   }
 
   onSubmitVideo(fileData) {
@@ -397,7 +395,6 @@ export class BecomeBeeComponent implements OnInit {
     for (let i = 0; i < fileData.length; i++) {
       myFormData.append('video', fileData[i]);
     }
-
   }
 
   onSubmitImage(fileData, type) {
@@ -406,8 +403,6 @@ export class BecomeBeeComponent implements OnInit {
       myFormData.append('image[]', fileData[i]);
     }
     myFormData.append('type', type);
-
-
   }
 }
 function PopupConfirmComponent(PopupConfirmComponent: any, arg1: { class: string; initialState: { confirmText: any; }; }): any {

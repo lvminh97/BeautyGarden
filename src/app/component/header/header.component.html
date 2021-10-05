@@ -18,7 +18,7 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" (click)="redirectToUserSetting()" [ngClass]="{'seperate-line': this.userInfo?.role != 'bee'}">Tài khoản của tôi</a>
-            <a class="dropdown-item" *ngIf="!this.userInfo || showBecomePandaBtn" (click)="redirectBecomeBee()" routerLinkActive="router-link-active">TRở thành Bee</a>
+            <a class="dropdown-item" *ngIf="!this.userInfo || showBecomePandaBtn" (click)="redirectBecomeBee()" routerLinkActive="router-link-active">Trở thành Bee</a>
             <a class="dropdown-item" (click)="redirectToTestDevice()">Kiểm tra thiết bị</a>
             <a class="dropdown-item" (click)="signOut()">Đăng xuất</a>
           </div>

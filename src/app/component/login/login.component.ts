@@ -79,6 +79,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.formLogin.value).then((res: any) => {
         const user: firebase.User = res.user;
+        console.log("res.user => " + res.user)
         // if (user.emailVerified) {
           const newUser: Account = {} as Account;
           newUser.displayName = user.displayName
@@ -107,17 +108,18 @@ export class LoginComponent implements OnInit {
 
     }).catch(err => {
       // debugger
-      // console.log(err.code)
+      console.log(err.code)
       switch (err.code) {
         case 'auth/user-not-found':
-          this.helperService.showError('error', 'Tài khoản chưa được đăng ký')
+          // this.helperService.showError('error', 'Tài khoản chưa được đăng ký')
+          alert("Tài khoản chưa được đăng ký")
           break
         case 'auth/wrong-password':
-          this.helperService.showError('error', 'Sai mật khẩu!')
+          // this.helperService.showError('error', 'Sai mật khẩu!')
           alert('Sai mật khẩu')
           break
         default:
-          this.helperService.showError('error', "Đăng nhập thất bại")
+          // this.helperService.showError('error', "Đăng nhập thất bại")
           alert('Đăng nhập thất bại')
           break
       }

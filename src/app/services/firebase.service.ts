@@ -10,14 +10,14 @@ import { Account } from '../class/account';
 export class FirebaseService {
   constructor() {}
   createUserInfo(uid, data) {
-    return firebase.firestore().collection('users').doc(uid).set(data);
+    return firebase.firestore().collection('/users').doc(uid).set(data);
   }
   createCall(uid, data) {
     return firebase.firestore().collection('call').doc(uid).set(data);
     // return firebase.database().ref('call/' + uid).set(data);
   }
   getUser() {
-    return firebase.firestore().collection('users').get();
+    return firebase.firestore().collection('/users').get();
   }
   login() {
 
@@ -28,9 +28,9 @@ export class FirebaseService {
   }
   getRefById(ref, id) {
     return new Promise((resolve, reject) => {
-
       firebase.firestore().collection(ref).doc(id).get().then((snapshot) => {
         const detail = snapshot.data();
+        console.log(detail)
         resolve(detail);
       });
     });
@@ -116,7 +116,7 @@ getRecomnendBee() {
     email: user.email,
       lastupdate: firebase.firestore.Timestamp.fromDate(new Date())
     };
-    return this.updateRef('users', user.uid, userUpdateData);
+    return this.updateRef('/users/', user.uid, userUpdateData);
   }
   searchRef(ref, name, q) {
     return new Promise((resolve, reject) => {
@@ -129,7 +129,7 @@ getRecomnendBee() {
   }
   getBee(uId) {
     return new Promise((resolve, reject) => {
-      firebase.database().ref('users/').orderByChild('uId').equalTo(uId).on('value', (snapshot) => {
+      firebase.database().ref('/users/').orderByChild('uId').equalTo(uId).on('value', (snapshot) => {
         const clients = valuesLd(snapshot.val());
         resolve(clients);
       });

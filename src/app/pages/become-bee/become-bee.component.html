@@ -75,7 +75,7 @@
             </div>
 
             <div class="pd-dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span>{{ beeProfile.gender }}</span>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -89,8 +89,7 @@
               <div class="header-in-box mrb-16">
                 <p class="fz-20 fw-600 lh-1 isRequire">Ngày sinh</p>
               </div>
-              <input type="text" [(ngModel)]="beeProfile.birthday" placeholder="Ngày sinh" class="form-control"
-              bsDatepicker [maxDate]="today" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', showWeekNumbers: false }" >
+              <input type="text" [(ngModel)]="beeProfile.birthday" placeholder="Ngày sinh" class="form-control" bsDatepicker [maxDate]="today" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', showWeekNumbers: false }" >
               <div class="pd-dropdown">
 
               </div>

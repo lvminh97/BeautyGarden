@@ -54,13 +54,13 @@ export class HeaderComponent implements OnInit {
       ) {
         this.userInfo = JSON.parse(this.cookie.get('account_info'));
         this.userInfo.status = "online";
-        firebase.firestore().collection("users").doc(this.userInfo.id).update('status', "online")
+        firebase.firestore().collection("/users").doc(this.userInfo.id).update('status', "online")
       }
       if (this.userInfo.role == 'bee') {
         this.showBecomePandaBtn = false;
       }
-      console.log(this.userInfo);
-      console.log(firebase.auth().currentUser);
+      // console.log(this.userInfo);
+      // console.log(firebase.auth().currentUser);
     });
     this.ringingAudio = new Audio();
     this.ringingAudio.src = '/assets/audio/rings_call.wav';
@@ -119,7 +119,7 @@ export class HeaderComponent implements OnInit {
           tempObject.id = doc.id;
           logs.push(tempObject);
         });
-        console.log(logs);
+        // console.log(logs);
         this.infoTheCall = logs.find((item) => { return item.status == 'pending' });
 
         if (logs.find((item) => { return item.status == 'pending' })) {
@@ -149,7 +149,7 @@ export class HeaderComponent implements OnInit {
           tempObject.id = doc.id;
           logs.push(tempObject);
         });
-        console.log(logs);
+        // console.log(logs);
         this.infoTheCall = logs.find((item) => { return item.status == 'cancel' })
         if (logs.find((item) => { return item.status == 'cancel' })) {
           let info = logs.find((item) => { return item.status == 'cancel' })
