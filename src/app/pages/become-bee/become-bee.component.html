@@ -35,12 +35,12 @@
               <div class="acc-info-img">
                 <div class="border-inner bgc-stratos">
                   <div *ngFor="let image of previewAvatar">
-                    <img [style]="{ width : '100%' }" [src]="image.url" alt="">
+                    <img [style]="{ width : '100%' }" [src]="beeProfile.avatarUrl" alt="">
                   </div>
                 </div>
               </div>
               <p class="acc-info-name">
-                {{userInfo?.displayName}}
+                {{beeProfile.displayName}}
               </p>
             </div>
 
@@ -63,7 +63,7 @@
             </div>
 
             <div class="item--added mih-250 mrb-16" *ngFor="let image of previewAvatar">
-              <img [style]="{ width : '100%' }" [src]="image.url" alt="">
+              <img [style]="{ width : '100%' }" [src]="beeProfile.avatarUrl" alt="">
             </div>
           </div>
 
@@ -75,8 +75,10 @@
             </div>
 
             <div class="pd-dropdown">
-              <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span>{{ beeProfile.gender }}</span>
+              <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 150px;">
+                <span *ngIf="beeProfile.gender=='male'">Nam</span>
+                <span *ngIf="beeProfile.gender=='female'">Nữ</span>
+                <span *ngIf="beeProfile.gender=='other'">Khác</span>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" (click)="setGender('male')">Nam</a>

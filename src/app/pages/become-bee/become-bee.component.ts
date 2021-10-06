@@ -106,14 +106,16 @@ export class BecomeBeeComponent implements OnInit {
   async getRegisterInfo() {
     this.previewAvatar = [];
     let res: any = await this.firebaseService.getRefById('/users',this.userInfo.id);
+    console.log(res)
+    this.beeProfile.avatarUrl = res.avatar[0].url
     this.beeProfile.displayName = res.displayName;
     this.beeProfile.gender = res.gender;
     this.beeProfile.birthday = res.gender;
     this.beeProfile.id = this.userInfo.id
     this.beeProfile.bio = res.bio;
+    this.beeProfile.role = res.role
     this.previewAvatar.push({url: res.logo });
     console.log(this.beeProfile)
-    // console.log(await this.firebaseService.getRefById('users',this.userInfo.id));
   }
 
   popupChooseAvatarDefault() {

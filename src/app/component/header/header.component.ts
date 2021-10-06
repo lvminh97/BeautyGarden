@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.subjectService.userInfo.subscribe((res) => {
-      debugger;
+      // debugger;
       this.userInfo = res;
       if (
         !this.userInfo &&

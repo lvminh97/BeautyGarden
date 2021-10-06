@@ -30,7 +30,6 @@ export class FirebaseService {
     return new Promise((resolve, reject) => {
       firebase.firestore().collection(ref).doc(id).get().then((snapshot) => {
         const detail = snapshot.data();
-        console.log(detail)
         resolve(detail);
       });
     });
