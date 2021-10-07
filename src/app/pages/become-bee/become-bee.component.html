@@ -34,8 +34,8 @@
             <div class="acc-info">
               <div class="acc-info-img">
                 <div class="border-inner bgc-stratos">
-                  <div *ngFor="let image of previewAvatar">
-                    <img [style]="{ width : '100%' }" [src]="beeProfile.avatarUrl" alt="">
+                  <div *ngIf="previewAvatar.length > 0">
+                    <img [style]="{ width : '100%' }" [src]="previewAvatar[0].url" alt="">
                   </div>
                 </div>
               </div>
@@ -62,8 +62,8 @@
               <img [src]="croppedImage" alt="">
             </div>
 
-            <div class="item--added mih-250 mrb-16" *ngFor="let image of previewAvatar">
-              <img [style]="{ width : '100%' }" [src]="beeProfile.avatarUrl" alt="">
+            <div class="item--added mih-250 mrb-16" *ngIf="previewAvatar.length > 0">
+              <img [style]="{ width : '100%' }" [src]="previewAvatar[0].url" alt="">
             </div>
           </div>
 

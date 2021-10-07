@@ -11,6 +11,7 @@ import { SubjectService } from 'src/app/services/subject.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Account } from 'src/app/class/account';
 import { stringify } from '@angular/compiler/src/util';
+import { async } from '@angular/core/testing';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -78,33 +79,39 @@ export class LoginComponent implements OnInit {
   }
   login() {
     this.authService.login(this.formLogin.value).then((res: any) => {
-        const user: firebase.User = res.user;
-        console.log("res.user => " + res.user)
-        // if (user.emailVerified) {
-          const newUser: Account = {} as Account;
-          newUser.displayName = user.displayName
-          newUser.id = user.uid;
-          newUser.email = this.formLogin.value.email;
-          newUser.emailVerified = false;
-          newUser.role = 'user';
-          newUser.status = 'online';
-          this.firebaseService.updateRef('users', user.uid,  newUser );
-          localStorage.setItem('user_data', JSON.stringify({
-            token: user.refreshToken,
-            data: newUser
-          }))
-          this.cookie.set('jwt_access_token', user.refreshToken, 365, '/');
-          this.cookie.set('account_info', JSON.stringify(newUser), 365, '/')
-          debugger;
-          this.subjectService.userInfo.next(newUser);
-          window.location.reload()
+      // const user: firebase.User = res.user;
+      new Promise(async (resolve, reject) =>{
+        const user: any = this.firebaseService.getRefById("/users", res.user.uid)
+        resolve(user)
+      }).then((user: any) => {
+      // if (user.emailVerified) {
+        console.log(user)
+        const newUser: Account = {} as Account;
+        newUser.displayName = user.displayName
+        newUser.id = user.id;
+        newUser.email = this.formLogin.value.email;
+        newUser.emailVerified = false;
+        newUser.role = user.role
+        newUser.status = 'online'
+        this.firebaseService.updateRef('users', user.id,  newUser )
+        localStorage.setItem('user_data', JSON.stringify({
+          token: user.refreshToken,
+          data: newUser
+        }))
+        this.cookie.set('jwt_access_token', user.refreshToken, 365, '/');
+        this.cookie.set('account_info', JSON.stringify(newUser), 365, '/')
+        // // debugger;
+        // this.subjectService.userInfo.next(newUser)
+        // this.router.navigate(['/'])
+        // window.location.reload()
 
-          // this.router.navigate(['/account-settings']);
+        // this.router.navigate(['/account-settings']);
 
-        // } else {
-        //   this.helperService.showError('error', "Đăng nhập thất bại");
-        // }
-        this.closeLoginModal();
+      // } else {
+      //   this.helperService.showError('error', "Đăng nhập thất bại");
+      // }
+      })
+      this.closeLoginModal();
 
     }).catch(err => {
       // debugger

@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import firebase from 'firebase';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -13,7 +13,7 @@ import { LoginComponent } from '../login/login.component';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   userInfo: any;
   listBee: any;
   unreadNotification: any;
@@ -47,14 +47,10 @@ export class HeaderComponent implements OnInit {
     this.subjectService.userInfo.subscribe((res) => {
       // debugger;
       this.userInfo = res;
-      if (
-        !this.userInfo &&
-        this.cookie.get('account_info') &&
-        this.cookie.get('account_info') != ''
-      ) {
+      if (!this.userInfo && this.cookie.get('account_info') && this.cookie.get('account_info') != '') {
         this.userInfo = JSON.parse(this.cookie.get('account_info'));
         this.userInfo.status = "online";
-        firebase.firestore().collection("/users").doc(this.userInfo.id).update('status', "online")
+        firebase.firestore().collection("users").doc(this.userInfo.id).update('status', "online")
       }
       if (this.userInfo.role == 'bee') {
         this.showBecomePandaBtn = false;
@@ -242,7 +238,7 @@ export class HeaderComponent implements OnInit {
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
-    firebase.firestore().collection("users").doc(this.userInfo.id).update("status", "offline");
+    firebase.firestore().collection("/users").doc(this.userInfo.id).update("status", "offline");
   }
   async createToken() {
     // firebase.functions().useEmulator("localhost", 5001); 

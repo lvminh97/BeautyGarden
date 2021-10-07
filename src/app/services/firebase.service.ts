@@ -16,8 +16,11 @@ export class FirebaseService {
     return firebase.firestore().collection('call').doc(uid).set(data);
     // return firebase.database().ref('call/' + uid).set(data);
   }
-  getUser() {
+  getUsers() {
     return firebase.firestore().collection('/users').get();
+  }
+  getUser(id){
+    return firebase.firestore().collection('/users').doc(id).get()
   }
   login() {
 
@@ -115,7 +118,7 @@ getRecomnendBee() {
     email: user.email,
       lastupdate: firebase.firestore.Timestamp.fromDate(new Date())
     };
-    return this.updateRef('/users/', user.uid, userUpdateData);
+    return this.updateRef('users', user.uid, userUpdateData);
   }
   searchRef(ref, name, q) {
     return new Promise((resolve, reject) => {

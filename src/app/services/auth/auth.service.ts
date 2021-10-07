@@ -25,7 +25,7 @@ export class AuthService {
         try {
           const res = await firebase.auth().signInWithEmailAndPassword(req.email, req.password);
           const uId = res.user.uid;
-          this.firebaseService.updateRef('user', uId, { lastJoin: firebase.firestore.Timestamp.fromDate(new Date())});
+          this.firebaseService.updateRef('users', uId, { lastJoin: firebase.firestore.Timestamp.fromDate(new Date())});
           resolve(res);
         }
         catch(error) {

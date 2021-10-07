@@ -107,10 +107,10 @@ export class BecomeBeeComponent implements OnInit {
     this.previewAvatar = [];
     let res: any = await this.firebaseService.getRefById('/users',this.userInfo.id);
     console.log(res)
-    this.beeProfile.avatarUrl = res.avatar[0].url
+    this.previewAvatar.push(res.avatar[0])
     this.beeProfile.displayName = res.displayName;
     this.beeProfile.gender = res.gender;
-    this.beeProfile.birthday = res.gender;
+    this.beeProfile.birthday = res.birthday;
     this.beeProfile.id = this.userInfo.id
     this.beeProfile.bio = res.bio;
     this.beeProfile.role = res.role
