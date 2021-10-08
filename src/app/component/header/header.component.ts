@@ -235,6 +235,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     //   this.deleteQueryBatch(db, query, resolve);
     // });
   }
+  doUnload(){
+    firebase.firestore().collection("users").doc(this.userInfo.id).update("status", "offline");
+  }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.

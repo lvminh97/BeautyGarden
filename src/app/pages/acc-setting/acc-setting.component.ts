@@ -176,6 +176,7 @@ export class AccSettingComponent implements OnInit {
     console.log(res);
     this.userProfile.id = res.id;
     this.userProfile.logo = res.logo;
+    this.userProfile.avatar = res.avatar[0].url
     this.userProfile.email = res.email;
     this.userProfile.displayName = res.displayName;
     this.userProfile.bio = res.bio ? res.bio : '';
