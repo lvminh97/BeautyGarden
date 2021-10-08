@@ -50,7 +50,7 @@ export class PresenceService {
 // }
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) {
-    console.log('presence');
+    // console.log('presence');
     this.updateOnUser().subscribe();
     this.updateOnDisconnect().subscribe();
     this.updateOnAway();

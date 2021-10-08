@@ -100,11 +100,9 @@ export class LoginComponent implements OnInit {
         }))
         this.cookie.set('jwt_access_token', user.refreshToken, 365, '/');
         this.cookie.set('account_info', JSON.stringify(newUser), 365, '/')
-        // // debugger;
-        // this.subjectService.userInfo.next(newUser)
-        // this.router.navigate(['/'])
-        // window.location.reload()
-
+        // debugger;
+        this.subjectService.userInfo.next(newUser)
+        window.location.reload()
         // this.router.navigate(['/account-settings']);
 
       // } else {
