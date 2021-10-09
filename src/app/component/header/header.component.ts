@@ -235,18 +235,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     //   this.deleteQueryBatch(db, query, resolve);
     // });
   }
-  doUnload(){
-    firebase.firestore().collection("users").doc(this.userInfo.id).update("status", "offline");
+  doBeforeUnload(){ // set status=offline when close website
+    // if(document.visibilityState === "hidden"){
+      firebase.firestore().collection("users").doc(this.userInfo.id).update("status", "offline");
+    // }
   }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
-    firebase.firestore().collection("/users").doc(this.userInfo.id).update("status", "offline");
+    // firebase.firestore().collection("users").doc(this.userInfo.id).update("status", "offline");
   }
   async createToken() {
-    // firebase.functions().useEmulator("localhost", 5001); 
-
-
+    // firebase.functions().useEmulator("localhost", 5001);
     const doCreateAgoraToken = firebase.app().functions().httpsCallable('doCreateAgoraToken');
     const tokenResult = await doCreateAgoraToken({channelName:'abcd'}); // chanel name chỗ này đặt random nhé, new Date().getTime() cũng đc
     console.log(tokenResult);
