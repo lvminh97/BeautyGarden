@@ -106,8 +106,7 @@ export class AccSettingComponent implements OnInit {
 
   async ngOnInit() {
     await this.getData();
-    console.log(this.userProfile.id);
-
+    // console.log(this.userProfile.id);
   }
   selectTab(type) {
     this.mainTab = type;
@@ -169,7 +168,6 @@ export class AccSettingComponent implements OnInit {
     }
   }
   async getData() {
-
     this.currentUser = await this.authService.getCurrentUser();
     const doc = await firebase.firestore().collection('users').doc(this.currentUser.uid).get()
     const res = doc.data();
@@ -184,8 +182,6 @@ export class AccSettingComponent implements OnInit {
     this.userProfile.birthday  = moment(res.birthday).format('DD-MM-YYYY');
     this.userProfile.follow = res.follow;
     this.userProfile.follower = res.follower;
-
-    // this.userProfile.birthday = res.birthday;
   }
   async updateBeeProfile() {
 
@@ -208,8 +204,7 @@ export class AccSettingComponent implements OnInit {
 
   }
   async saveUserProfile() {
-    this.userProfile.birthday = moment(this.userProfile.birthday , 'DD/MM/YYYY').format('YYYY-MM-DD');
-    console.log(this.userProfile.logo);
+    this.userProfile.birthday = moment(this.userProfile.birthday , 'DD-MM-YYYY').format('DD-MM-YYYY');
     let status = true;
 
     if (!this.userProfile.gender) {
@@ -219,8 +214,9 @@ export class AccSettingComponent implements OnInit {
       status = false;
     }
     if (status == false) {
-      alert('Nhập đầy đủ thông tin');
-    } else {
+      alert('Cần nhập đầy đủ thông tin');
+    } 
+    else {
       if (this.fileData) {
         debugger;
         const avtUrl = await this.firebaseService.uploadLogo(this.userProfile.logo, 'userAvt/');
@@ -243,12 +239,11 @@ export class AccSettingComponent implements OnInit {
         reviewScore: 4,
         contentReview: "Cực kỳ nhiệt tình và thân thiện"
       }
-      this.userProfile.review.push(review);
-      console.log(this.userProfile.review);
-      this.firebaseService.updateRef('users', this.userProfile.id,  this.userProfile);
-      alert("thành công rồi");
+      this.userProfile.review.push(review)
+      // console.log(this.userProfile.review);
+      this.firebaseService.updateRef('users', this.userProfile.id,  this.userProfile)
+      alert("Đã cập nhật")
       this.userProfile.birthday = moment(this.userProfile.birthday).format('DD-MM-YYYY');
-
     }
   }
   initTabFavorite() {

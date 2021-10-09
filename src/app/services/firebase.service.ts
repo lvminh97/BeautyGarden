@@ -10,17 +10,17 @@ import { Account } from '../class/account';
 export class FirebaseService {
   constructor() {}
   createUserInfo(uid, data) {
-    return firebase.firestore().collection('/users').doc(uid).set(data);
+    return firebase.firestore().collection('users').doc(uid).set(data);
   }
   createCall(uid, data) {
     return firebase.firestore().collection('call').doc(uid).set(data);
     // return firebase.database().ref('call/' + uid).set(data);
   }
   getUsers() {
-    return firebase.firestore().collection('/users').get();
+    return firebase.firestore().collection('users').get();
   }
   getUser(id){
-    return firebase.firestore().collection('/users').doc(id).get()
+    return firebase.firestore().collection('users').doc(id).get()
   }
   login() {
 

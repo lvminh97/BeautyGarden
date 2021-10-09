@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.formLogin.value).then((res: any) => {
       // const user: firebase.User = res.user;
       new Promise(async (resolve, reject) =>{
-        const user: any = this.firebaseService.getRefById("/users", res.user.uid)
+        const user: any = this.firebaseService.getRefById("users", res.user.uid)
         resolve(user)
       }).then((user: any) => {
       // if (user.emailVerified) {
@@ -139,6 +139,8 @@ export class LoginComponent implements OnInit {
       });
       this.createUserInfo(newUser);
       newUser.sendEmailVerification();
+      // console.log("Signup")
+      // console.log(newUser)
       this.closeLoginModal();
       this.helperService.showSuccess('success', 'Đăng ký thành công');
     }).catch(err => {
@@ -171,13 +173,15 @@ export class LoginComponent implements OnInit {
     }, 200);
   }
   createUserInfo(userInfo) {
-    console.log(this.formSignUp);
-    const user: Account = {} as Account;
+    // console.log(this.formSignUp);
+    let user: Account = {} as Account;
+    user.id = userInfo.uid
+    user.uid = userInfo.uid
     user.displayName = this.formSignUp.value.name;
     user.email = userInfo.email;
     user.emailVerified = false;
+    user.role = "user"
+    user.status = "offline"
     this.firebaseService.createUserInfo(userInfo.uid,  user);
   }
-
-
 }
