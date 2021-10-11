@@ -173,15 +173,15 @@ export class AccSettingComponent implements OnInit {
     const res = doc.data();
     console.log(res);
     this.userProfile.id = res.id;
-    this.userProfile.logo = res.logo;
+    this.userProfile.logo = res.logo ? res.logo : "";
     this.userProfile.avatar = res.avatar[0].url
     this.userProfile.email = res.email;
     this.userProfile.displayName = res.displayName;
     this.userProfile.bio = res.bio ? res.bio : '';
     this.userProfile.gender = res.gender ;
     this.userProfile.birthday  = moment(res.birthday).format('DD-MM-YYYY');
-    this.userProfile.follow = res.follow;
-    this.userProfile.follower = res.follower;
+    this.userProfile.follow = res.follow && res.follow.length > 0 ? res.follow : [];
+    this.userProfile.follower = res.follower && res.follower.length > 0 ? res.follower : [];
   }
   async updateBeeProfile() {
 
@@ -215,7 +215,7 @@ export class AccSettingComponent implements OnInit {
     }
     if (status == false) {
       alert('Cần nhập đầy đủ thông tin');
-    } 
+    }
     else {
       if (this.fileData) {
         debugger;
@@ -240,10 +240,9 @@ export class AccSettingComponent implements OnInit {
         contentReview: "Cực kỳ nhiệt tình và thân thiện"
       }
       this.userProfile.review.push(review)
-      // console.log(this.userProfile.review);
       this.firebaseService.updateRef('users', this.userProfile.id,  this.userProfile)
       alert("Đã cập nhật")
-      this.userProfile.birthday = moment(this.userProfile.birthday).format('DD-MM-YYYY');
+      // this.userProfile.birthday = moment(this.userProfile.birthday).format('DD-MM-YYYY');
     }
   }
   initTabFavorite() {
