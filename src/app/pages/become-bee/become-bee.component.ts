@@ -74,9 +74,6 @@ export class BecomeBeeComponent implements OnInit {
   tagsEN = ['Fun', 'Pretty', 'Cute', 'Sweet Voice', 'Epic Gamer', 'Cosplay', 'Asian', 'Blonde', 'Talents'];
   autocompleteTags = this.tagsEN;
 
-
-
-
   constructor(
     private helperService: HelperService,
     public router: Router,
@@ -105,17 +102,17 @@ export class BecomeBeeComponent implements OnInit {
 
   async getRegisterInfo() {
     this.previewAvatar = [];
-    let res: any = await this.firebaseService.getRefById('/users',this.userInfo.id);
-    console.log(res)
+    let res: any = await this.firebaseService.getRefById('users',this.userInfo.id);
+    // console.log(res)
     this.previewAvatar.push(res.avatar[0])
     this.beeProfile.displayName = res.displayName;
     this.beeProfile.gender = res.gender;
-    this.beeProfile.birthday = res.birthday;
+    this.beeProfile.birthday = moment(res.birthday, "YYYY-MM-DD").format("DD-MM-YYYY");
     this.beeProfile.id = this.userInfo.id
     this.beeProfile.bio = res.bio;
     this.beeProfile.role = res.role
     this.previewAvatar.push({url: res.logo });
-    console.log(this.beeProfile)
+    // console.log(this.beeProfile)
   }
 
   popupChooseAvatarDefault() {

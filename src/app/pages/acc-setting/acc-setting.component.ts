@@ -171,10 +171,10 @@ export class AccSettingComponent implements OnInit {
     this.currentUser = await this.authService.getCurrentUser();
     const doc = await firebase.firestore().collection('users').doc(this.currentUser.uid).get()
     const res = doc.data();
-    console.log(res);
+    // console.log(res);
     this.userProfile.id = res.id;
     this.userProfile.logo = res.logo ? res.logo : "";
-    this.userProfile.avatar = res.avatar[0].url
+    this.userProfile.avatar = res.avatar;
     this.userProfile.email = res.email;
     this.userProfile.displayName = res.displayName;
     this.userProfile.bio = res.bio ? res.bio : '';
@@ -182,6 +182,7 @@ export class AccSettingComponent implements OnInit {
     this.userProfile.birthday  = moment(res.birthday).format('DD-MM-YYYY');
     this.userProfile.follow = res.follow && res.follow.length > 0 ? res.follow : [];
     this.userProfile.follower = res.follower && res.follower.length > 0 ? res.follower : [];
+    // console.log(this.userProfile)
   }
   async updateBeeProfile() {
 
@@ -204,7 +205,8 @@ export class AccSettingComponent implements OnInit {
 
   }
   async saveUserProfile() {
-    this.userProfile.birthday = moment(this.userProfile.birthday , 'DD-MM-YYYY').format('DD-MM-YYYY');
+    this.userProfile.birthday = moment(this.userProfile.birthday, 'DD-MM-YYYY').format('YYYY-MM-DD');
+
     let status = true;
 
     if (!this.userProfile.gender) {
@@ -242,7 +244,8 @@ export class AccSettingComponent implements OnInit {
       this.userProfile.review.push(review)
       this.firebaseService.updateRef('users', this.userProfile.id,  this.userProfile)
       alert("Đã cập nhật")
-      // this.userProfile.birthday = moment(this.userProfile.birthday).format('DD-MM-YYYY');
+      
+      this.userProfile.birthday = moment(this.userProfile.birthday).format('DD-MM-YYYY');
     }
   }
   initTabFavorite() {
@@ -337,7 +340,7 @@ export class AccSettingComponent implements OnInit {
   }
   removeImage() {
     this.image.nativeElement.value = '';
-    this.userProfile.logo = '../../../assets/img/blank-profile.png';
+    this.userProfile.logo = './assets/img/blank-profile.png';
     this.userProfile.avatar = '';
     this.isRemoveLogo = true;
   }

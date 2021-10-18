@@ -37,7 +37,7 @@
                   </div> -->
                 <div class="form-custom__row flex-align-center mb-40">
                   <div class="img-profile">
-                    <img class="pre-upload" style="width: 120px; height: 120px;" src="{{userProfile?.avatar ? userProfile?.avatar : './assets/img/blank-profile.png' }}" >
+                    <img class="pre-upload" style="width: 120px; height: 120px;" src="{{userProfile.avatar ? userProfile.avatar[0].url : './assets/img/blank-profile.png' }}" >
                   </div>
                   <label class="upload-btn sub-heading" style="margin-top: 20px">
                     Upload Image
