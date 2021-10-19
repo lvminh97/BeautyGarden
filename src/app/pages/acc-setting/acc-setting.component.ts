@@ -64,7 +64,7 @@ export class AccSettingComponent implements OnInit {
     birthday: '',
     email: '',
     emailVerified: false,
-    avatar: '',
+    avatar: [],
     logo: '',
     advise: [],
     review: [],
@@ -244,7 +244,7 @@ export class AccSettingComponent implements OnInit {
       this.userProfile.review.push(review)
       this.firebaseService.updateRef('users', this.userProfile.id,  this.userProfile)
       alert("Đã cập nhật")
-      
+
       this.userProfile.birthday = moment(this.userProfile.birthday).format('DD-MM-YYYY');
     }
   }
@@ -341,7 +341,7 @@ export class AccSettingComponent implements OnInit {
   removeImage() {
     this.image.nativeElement.value = '';
     this.userProfile.logo = './assets/img/blank-profile.png';
-    this.userProfile.avatar = '';
+    this.userProfile.avatar = [];
     this.isRemoveLogo = true;
   }
   previewImage(file, callback: any = false, index = null) {
